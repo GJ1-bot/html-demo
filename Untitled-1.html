@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Search Results - Luxury Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Kufi+Arabic:wght@400;700&display=swap');
+    
+    .filter-active {
+      @apply bg-[#6B2C3F] text-white;
+    }
+    
+    .range-slider::-webkit-slider-thumb {
+      @apply appearance-none w-4 h-4 rounded-full bg-[#D4AF37] cursor-pointer;
+    }
+
+    .shimmer {
+      background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .scroll-snap {
+      scroll-snap-type: x mandatory;
+    }
+
+    .scroll-snap > * {
+      scroll-snap-align: start;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Enhanced Search Header with Voice & Visual Search -->
+  <div class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-6">
+      <div class="flex items-center space-x-4">
+        <div class="flex-grow relative">
+          <div class="flex items-center">
+            <input type="text" 
+                   placeholder="Search for jewelry..." 
+                   value="Diamond Necklace"
+                   class="w-full pl-12 pr-32 py-3 border rounded-full focus:outline-none focus:border-[#6B2C3F] focus:ring-2 focus:ring-[#6B2C3F]/20">
+            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            
+            <!-- Enhanced Search Controls -->
+            <div class="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+              <button class="p-2 hover:bg-gray-100 rounded-full tooltip" data-tip="Voice Search">
+                <i class="fas fa-microphone text-[#6B2C3F]"></i>
+              </button>
+              <button class="p-2 hover:bg-gray-100 rounded-full tooltip" data-tip="Visual Search">
+                <i class="fas fa-camera text-[#6B2C3F]"></i>
+              </button>
+              <span class="w-px h-6 bg-gray-200"></span>
+              <button class="p-2 hover:bg-gray-100 rounded-full tooltip" data-tip="Advanced Search">
+                <i class="fas fa-sliders-h text-[#6B2C3F]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Search Suggestions -->
+          <div class="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border p-2 hidden group-focus-within:block">
+            <div class="space-y-2">
+              <div class="flex items-center p-2 hover:bg-gray-50 rounded cursor-pointer">
+                <i class="fas fa-history text-gray-400 mr-3"></i>
+                <span>Diamond Necklace with Arabic Design</span>
+              </div>
+              <div class="flex items-center p-2 hover:bg-gray-50 rounded cursor-pointer">
+                <i class="fas fa-trending-up text-[#D4AF37] mr-3"></i>
+                <span>Trending: Eid Collection</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Enhanced AI Assistant -->
+        <div class="relative group">
+          <button class="bg-[#6B2C3F] text-white px-6 py-3 rounded-full hover:bg-[#D4AF37] flex items-center">
+            <i class="fas fa-magic mr-2"></i>
+            AI Assistant
+          </button>
+          <!-- AI Assistant Tooltip -->
+          <div class="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-lg p-4 w-64 hidden group-hover:block">
+            <h4 class="font-semibold mb-2">AI Shopping Assistant</h4>
+            <p class="text-sm text-gray-600 mb-3">Let AI help you find the perfect piece</p>
+            <div class="space-y-2">
+              <button class="w-full text-left text-sm p-2 hover:bg-gray-50 rounded">
+                <i class="fas fa-wand-magic-sparkles text-[#D4AF37] mr-2"></i>
+                Style Recommendations
+              </button>
+              <button class="w-full text-left text-sm p-2 hover:bg-gray-50 rounded">
+                <i class="fas fa-gift text-[#D4AF37] mr-2"></i>
+                Gift Suggestions
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Enhanced Quick Filters -->
+      <div class="mt-6 flex items-center">
+        <span class="text-gray-600 mr-4">Quick Filters:</span>
+        <div class="flex-grow overflow-x-auto scroll-snap">
+          <div class="flex space-x-4 min-w-max">
+            <button class="px-4 py-2 rounded-full border hover:border-[#6B2C3F] filter-active flex items-center">
+              <i class="fas fa-gem mr-2"></i>
+              Necklaces
+            </button>
+            <button class="px-4 py-2 rounded-full border hover:border-[#6B2C3F] flex items-center">
+              <span class="w-2 h-2 bg-white border rounded-full mr-2"></span>
+              Diamond
+            </button>
+            <button class="px-4 py-2 rounded-full border hover:border-[#6B2C3F] flex items-center">
+              <span class="w-2 h-2 bg-[#FFD700] rounded-full mr-2"></span>
+              18K Gold
+            </button>
+            <button class="px-4 py-2 rounded-full border hover:border-[#6B2C3F] flex items-center">
+              <i class="fas fa-tag mr-2"></i>
+              Under $5,000
+            </button>
+            <button class="px-4 py-2 rounded-full border hover:border-[#6B2C3F] flex items-center">
+              <i class="fas fa-star mr-2"></i>
+              Best Sellers
+            </button>
+            <button class="px-4 py-2 rounded-full border hover:border-[#6B2C3F] flex items-center">
+              <i class="fas fa-mosque mr-2"></i>
+              Arabic Design
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Filters -->
+      <div class="flex items-center flex-wrap gap-2 mt-4">
+        <div class="bg-[#6B2C3F]/10 text-[#6B2C3F] px-3 py-1 rounded-full text-sm flex items-center">
+          Necklaces
+          <button class="ml-2 hover:text-[#D4AF37]">×</button>
+        </div>
+        <div class="bg-[#6B2C3F]/10 text-[#6B2C3F] px-3 py-1 rounded-full text-sm flex items-center">
+          Diamond
+          <button class="ml-2 hover:text-[#D4AF37]">×</button>
+        </div>
+        <button class="text-sm text-[#6B2C3F] hover:underline">
+          Clear All
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-12 gap-8">
+      <!-- Enhanced Left: Advanced Filters -->
+      <div class="col-span-3">
+        <div class="sticky top-28">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-xl font-semibold">Filters</h2>
+              <button class="text-sm text-[#6B2C3F] hover:underline">Reset All</button>
+            </div>
+            
+            <!-- Enhanced Price Range with Dual Slider -->
+            <div class="mb-6">
+              <h3 class="font-semibold mb-4">Price Range</h3>
+              <div class="relative">
+                <div class="flex justify-between mb-2">
+                  <input type="number" 
+                         value="0" 
+                         class="w-24 px-2 py-1 border rounded text-sm"
+                         placeholder="Min">
+                  <span class="text-gray-400">-</span>
+                  <input type="number" 
+                         value="10000" 
+                         class="w-24 px-2 py-1 border rounded text-sm"
+                         placeholder="Max">
+                </div>
+                <div class="relative h-2 bg-gray-200 rounded-lg">
+                  <div class="absolute h-full bg-[#6B2C3F] rounded-lg" style="left: 0%; right: 50%"></div>
+                  <input type="range" 
+                         min="0" 
+                         max="10000" 
+                         value="5000" 
+                         class="range-slider absolute w-full h-full opacity-0 cursor-pointer">
+                </div>
+                <div class="flex justify-between mt-2 text-sm text-gray-600">
+                  <span>$0</span>
+                  <span>$10,000+</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Enhanced Material Selection -->
+            <div class="mb-6">
+              <h3 class="font-semibold mb-4">Material</h3>
+              <div class="space-y-3">
+                <label class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input type="checkbox" class="form-checkbox text-[#6B2C3F] rounded">
+                  <span class="ml-3">18K Gold</span>
+                  <span class="ml-auto text-gray-500 text-sm">(124)</span>
+                </label>
+                <label class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input type="checkbox" class="form-checkbox text-[#6B2C3F] rounded">
+                  <span class="ml-3">Platinum</span>
+                  <span class="ml-auto text-gray-500 text-sm">(89)</span>
+                </label>
+                <label class="flex items-center p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <input type="checkbox" class="form-checkbox text-[#6B2C3F] rounded">
+                  <span class="ml-3">Rose Gold</span>
+                  <span class="ml-auto text-gray-500 text-sm">(67)</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Enhanced Style Selection -->
+            <div class="mb-6">
+              <h3 class="font-semibold mb-4">Style</h3>
+              <div class="grid grid-cols-2 gap-2">
+                <button class="p-3 border rounded-lg hover:border-[#6B2C3F] text-center group">
+                  <i class="fas fa-crown text-2xl text-[#D4AF37] mb-2 group-hover:scale-110 transition-transform"></i>
+                  <p class="text-sm">Royal</p>
+                </button>
+                <button class="p-3 border rounded-lg hover:border-[#6B2C3F] text-center group">
+                  <i class="fas fa-mosque text-2xl text-[#D4AF37] mb-2 group-hover:scale-110 transition-transform"></i>
+                  <p class="text-sm">Arabic</p>
+                </button>
+                <button class="p-3 border rounded-lg hover:border-[#6B2C3F] text-center group">
+                  <i class="fas fa-star text-2xl text-[#D4AF37] mb-2 group-hover:scale-110 transition-transform"></i>
+                  <p class="text-sm">Modern</p>
+                </button>
+                <button class="p-3 border rounded-lg hover:border-[#6B2C3F] text-center group">
+                  <i class="fas fa-heart text-2xl text-[#D4AF37] mb-2 group-hover:scale-110 transition-transform"></i>
+                  <p class="text-sm">Classic</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- Enhanced Diamond Quality -->
+            <div class="mb-6">
+              <h3 class="font-semibold mb-4">Diamond Quality</h3>
+              <div class="relative">
+                <div class="grid grid-cols-3 gap-2">
+                  <button class="p-2 text-sm border rounded hover:border-[#6B2C3F] relative group">
+                    VS1
+                    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-white p-2 rounded shadow-lg text-xs hidden group-hover:block w-32">
+                      Very Slightly Included 1
+                    </div>
+                  </button>
+                  <!-- More quality options -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Enhanced Right: Search Results -->
+      <div class="col-span-9">
+        <!-- Enhanced Results Header -->
+        <div class="bg-white rounded-lg shadow-lg p-4 mb-6">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-gray-600">
+                Showing <span class="font-semibold">24</span> results for 
+                <span class="font-semibold">"Diamond Necklace"</span>
+              </p>
+              <p class="text-sm text-gray-500 mt-1">
+                Found in 0.3 seconds
+              </p>
+            </div>
+            <div class="flex items-center space-x-4">
+              <select class="border rounded-lg px-4 py-2 focus:outline-none focus:border-[#6B2C3F]">
+                <option>Sort by: Featured</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Newest First</option>
+                <option>Best Selling</option>
+              </select>
+              <div class="flex space-x-2">
+                <button class="p-2 border rounded-lg hover:border-[#6B2C3F] bg-[#6B2C3F] text-white">
+                  <i class="fas fa-th-large"></i>
+                </button>
+                <button class="p-2 border rounded-lg hover:border-[#6B2C3F]">
+                  <i class="fas fa-list"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Enhanced Results Grid -->
+        <div class="grid grid-cols-3 gap-6">
+          <!-- Enhanced Product Card -->
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
+            <div class="relative">
+              <!-- Main Image with Lazy Loading -->
+              <img src="https://via.placeholder.com/300" 
+                   alt="Diamond Necklace" 
+                   class="w-full aspect-square object-cover transition-transform group-hover:scale-105"
+                   loading="lazy">
+              
+              <!-- Quick Actions Overlay -->
+              <div class="absolute top-4 right-4 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button class="bg-white/90 p-2 rounded-full shadow-lg hover:bg-[#6B2C3F] hover:text-white tooltip" data-tip="Add to Wishlist">
+                  <i class="far fa-heart"></i>
+                </button>
+                <button class="bg-white/90 p-2 rounded-full shadow-lg hover:bg-[#6B2C3F] hover:text-white tooltip" data-tip="Quick View">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="bg-white/90 p-2 rounded-full shadow-lg hover:bg-[#6B2C3F] hover:text-white tooltip" data-tip="Virtual Try-On">
+                  <i class="fas fa-cube"></i>
+                </button>
+              </div>
+
+              <!-- Enhanced AI Match Score -->
+              <div class="absolute bottom-4 left-4 bg-white/90 px-3 py-1 rounded-full text-sm flex items-center">
+                <i class="fas fa-magic text-[#D4AF37] mr-1"></i>
+                <span class="font-semibold">98% Match</span>
+                <div class="ml-1 group relative">
+                  <i class="fas fa-info-circle text-gray-400 hover:text-[#6B2C3F]"></i>
+                  <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-white p-2 rounded shadow-lg text-xs w-48 hidden group-hover:block">
+                    Based on your preferences and browsing history
+                  </div>
+                </div>
+              </div>
+
+              <!-- New Arrival Badge -->
+              <div class="absolute top-4 left-4 bg-[#D4AF37] text-white px-3 py-1 rounded-full text-xs">
+                New Arrival
+              </div>
+            </div>
+
+            <!-- Enhanced Product Info -->
+            <div class="p-4">
+              <div class="flex items-start justify-between mb-2">
+                <h3 class="font-semibold">Crescent Diamond Necklace</h3>
+                <button class="text-[#6B2C3F] hover:underline text-sm">
+                  Compare
+                </button>
+              </div>
+              <p class="text-gray-600 text-sm mb-2">18K Gold, VS1</p>
+              <div class="flex items-center mb-2">
+                <div class="flex text-[#D4AF37]">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="text-sm text-gray-500 ml-2">(24 reviews)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-[#D4AF37] font-bold">$4,999</span>
+                  <span class="text-sm text-gray-500 ml-2">or 4 payments of $1,249.75</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Add -->
+            <div class="p-4 border-t">
+              <button class="w-full bg-[#6B2C3F] text-white py-2 rounded-full hover:bg-[#D4AF37]">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+          <!-- Repeat for more products -->
+        </div>
+        
+        <!-- Enhanced Load More -->
+        <div class="text-center mt-8">
+          <button class="bg-[#6B2C3F] text-white px-8 py-3 rounded-full hover:bg-[#D4AF37] flex items-center justify-center mx-auto">
+            <span>Load More Results</span>
+            <i class="fas fa-spinner ml-2"></i>
+          </button>
+          <p class="text-sm text-gray-500 mt-2">
+            Showing 24 of 156 products
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recently Viewed -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg transform translate-y-full transition-transform hover:translate-y-0">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold">Recently Viewed</h3>
+        <button class="text-[#6B2C3F] hover:underline text-sm">Clear All</button>
+      </div>
+      <div class="flex space-x-4 overflow-x-auto">
+        <!-- Recently viewed items -->
+        <div class="flex-shrink-0 w-24">
+          <img src="https://via.placeholder.com/100" alt="Recent Item" class="w-full aspect-square object-cover rounded">
+        </div>
+        <!-- More items -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>
