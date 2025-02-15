@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Custom Design - Luxury Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+    
+    .design-canvas {
+      background: linear-gradient(45deg, #f1f1f1 25%, transparent 25%),
+                  linear-gradient(-45deg, #f1f1f1 25%, transparent 25%),
+                  linear-gradient(45deg, transparent 75%, #f1f1f1 75%),
+                  linear-gradient(-45deg, transparent 75%, #f1f1f1 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+
+    .color-picker {
+      background: conic-gradient(
+        #FFD700,
+        #E5E4E2,
+        #B76E79,
+        #FFFFFF,
+        #FFD700
+      );
+    }
+
+    .inspiration-card {
+      transition: transform 0.3s ease;
+    }
+
+    .inspiration-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .tooltip-custom {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .has-tooltip:hover .tooltip-custom {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .rotate-animation {
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Enhanced Progress Bar -->
+  <div class="fixed top-0 left-0 right-0 h-1 bg-gray-200 z-50">
+    <div class="h-full bg-[#6B2C3F] w-1/3"></div>
+  </div>
+
+  <div class="container mx-auto px-4 py-8">
+    <!-- Enhanced Header -->
+    <div class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-3xl font-playfair mb-2">Custom Design Studio</h1>
+        <p class="text-gray-600">Create your perfect piece with our advanced design tools</p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button class="text-[#6B2C3F] hover:underline flex items-center">
+          <i class="fas fa-bookmark mr-2"></i>
+          Save Progress
+        </button>
+        <button class="bg-[#6B2C3F] text-white px-6 py-3 rounded-full hover:bg-[#D4AF37]">
+          Request Consultation
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-8">
+      <!-- Enhanced Left: Design Tools -->
+      <div class="col-span-3">
+        <div class="sticky top-8 space-y-6">
+          <!-- Enhanced AI Design Assistant -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="mb-6">
+              <button class="w-full bg-[#6B2C3F] text-white p-4 rounded-lg hover:bg-[#D4AF37] relative group">
+                <div class="absolute -top-2 -right-2 bg-[#D4AF37] text-xs px-2 py-1 rounded-full">
+                  New
+                </div>
+                <i class="fas fa-magic mr-2"></i>
+                AI Design Assistant
+              </button>
+              <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold mb-2">AI Suggestions</h4>
+                <div class="space-y-2">
+                  <div class="flex items-center text-sm">
+                    <i class="fas fa-lightbulb text-[#D4AF37] mr-2"></i>
+                    Try adding Arabic calligraphy
+                  </div>
+                  <div class="flex items-center text-sm">
+                    <i class="fas fa-star text-[#D4AF37] mr-2"></i>
+                    Popular: Geometric patterns
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enhanced Material Selection -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="font-semibold mb-4">Material</h3>
+            <div class="space-y-4">
+              <!-- Enhanced Material Selector -->
+              <div class="relative group">
+                <div class="w-full h-12 color-picker rounded-lg cursor-pointer"></div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span class="bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                    Click to choose
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Material Options -->
+              <div class="grid grid-cols-2 gap-2">
+                <button class="p-3 border rounded-lg hover:border-[#6B2C3F] filter-active flex items-center relative group">
+                  <span class="w-4 h-4 rounded-full bg-[#FFD700] mr-2"></span>
+                  18K Gold
+                  <div class="tooltip-custom absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-white p-2 rounded shadow-lg text-xs w-32">
+                    Premium quality, 18 Karat
+                  </div>
+                </button>
+                <!-- More material options -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Enhanced Gemstone Selection -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="font-semibold mb-4">Gemstones</h3>
+            <div class="space-y-4">
+              <!-- Gemstone Categories -->
+              <div class="flex space-x-2">
+                <button class="flex-1 p-2 text-sm bg-[#6B2C3F] text-white rounded-lg">
+                  Diamonds
+                </button>
+                <button class="flex-1 p-2 text-sm border rounded-lg hover:border-[#6B2C3F]">
+                  Precious
+                </button>
+                <button class="flex-1 p-2 text-sm border rounded-lg hover:border-[#6B2C3F]">
+                  Semi-Precious
+                </button>
+              </div>
+
+              <!-- Enhanced Gemstone Grid -->
+              <div class="grid grid-cols-3 gap-2">
+                <button class="p-2 border rounded-lg hover:border-[#6B2C3F] group">
+                  <div class="relative">
+                    <img src="https://via.placeholder.com/40" alt="Diamond" 
+                         class="w-full aspect-square object-cover rounded mb-1">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <i class="fas fa-plus text-white"></i>
+                    </div>
+                  </div>
+                  <span class="text-xs">Diamond</span>
+                </button>
+                <!-- More gemstone options -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Enhanced Style Templates -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="font-semibold mb-4">Style Templates</h3>
+            <div class="space-y-3">
+              <button class="w-full p-4 border rounded-lg hover:border-[#6B2C3F] text-left relative group">
+                <div class="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+                <i class="fas fa-crown text-[#D4AF37] mr-2"></i>
+                Royal Arabic
+                <p class="text-xs text-gray-500 mt-1">Traditional royal designs</p>
+              </button>
+              <!-- More style templates -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Enhanced Center: Design Canvas -->
+      <div class="col-span-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <!-- Enhanced Canvas Controls -->
+          <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center space-x-4">
+              <div class="flex space-x-2">
+                <button class="p-2 border rounded-lg hover:border-[#6B2C3F] disabled:opacity-50" disabled>
+                  <i class="fas fa-undo"></i>
+                </button>
+                <button class="p-2 border rounded-lg hover:border-[#6B2C3F] disabled:opacity-50" disabled>
+                  <i class="fas fa-redo"></i>
+                </button>
+              </div>
+              <select class="border rounded-lg px-4 py-2">
+                <option>100%</option>
+                <option>75%</option>
+                <option>50%</option>
+              </select>
+            </div>
+            <div class="flex space-x-2">
+              <button class="bg-[#6B2C3F] text-white px-4 py-2 rounded-lg hover:bg-[#D4AF37]">
+                <i class="fas fa-save mr-2"></i>
+                Save
+              </button>
+              <button class="bg-[#6B2C3F] text-white px-4 py-2 rounded-lg hover:bg-[#D4AF37]">
+                <i class="fas fa-share mr-2"></i>
+                Share
+              </button>
+            </div>
+          </div>
+          
+          <!-- Enhanced Design Canvas -->
+          <div class="design-canvas aspect-square rounded-lg mb-6 relative group">
+            <!-- 3D Preview -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="relative">
+                <i class="fas fa-gem text-8xl text-gray-300 rotate-animation"></i>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div class="bg-black/50 text-white px-4 py-2 rounded-lg">
+                    Click to interact with 3D model
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Design Guidelines -->
+            <div class="absolute inset-0 border-2 border-dashed border-gray-300 opacity-50"></div>
+
+            <!-- Interactive Points -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div class="w-4 h-4 bg-[#6B2C3F] rounded-full cursor-move"></div>
+            </div>
+          </div>
+          
+          <!-- Enhanced View Controls -->
+          <div class="flex justify-center space-x-6">
+            <button class="p-3 border rounded-lg hover:border-[#6B2C3F] flex items-center">
+              <i class="fas fa-cube mr-2"></i>
+              3D View
+            </button>
+            <button class="p-3 border rounded-lg hover:border-[#6B2C3F] flex items-center">
+              <i class="fas fa-ruler mr-2"></i>
+              Measurements
+            </button>
+            <button class="p-3 border rounded-lg hover:border-[#6B2C3F] flex items-center">
+              <i class="fas fa-vr-cardboard mr-2"></i>
+              AR Preview
+            </button>
+          </div>
+        </div>
+
+        <!-- Enhanced Inspiration Gallery -->
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold mb-4">Design Inspiration</h3>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="inspiration-card bg-white rounded-lg shadow-lg overflow-hidden">
+              <img src="https://via.placeholder.com/200" alt="Inspiration" 
+                   class="w-full aspect-square object-cover">
+              <div class="p-3">
+                <h4 class="font-semibold">Arabic Motifs</h4>
+                <p class="text-sm text-gray-600">Traditional patterns</p>
+              </div>
+            </div>
+            <!-- More inspiration cards -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Enhanced Right: Preview & Details -->
+      <div class="col-span-3">
+        <div class="sticky top-8 space-y-6">
+          <!-- Enhanced Preview -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold mb-6">Design Details</h2>
+            
+            <!-- Enhanced Price Estimate -->
+            <div class="mb-6">
+              <h3 class="font-semibold mb-2">Estimated Price</h3>
+              <div class="flex items-end">
+                <div class="text-2xl text-[#D4AF37] font-bold">$4,999</div>
+                <span class="text-sm text-gray-500 ml-2">±5%</span>
+              </div>
+              <div class="flex items-center mt-2">
+                <i class="fas fa-info-circle text-gray-400 mr-2"></i>
+                <p class="text-sm text-gray-600">Price may vary based on final specifications</p>
+              </div>
+            </div>
+            
+            <!-- Enhanced Materials Summary -->
+            <div class="mb-6
