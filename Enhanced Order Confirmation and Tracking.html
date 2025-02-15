@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Order Confirmation - Luxury Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Kufi+Arabic:wght@400;700&display=swap');
+    
+    .tracking-line {
+      height: 2px;
+      background: linear-gradient(to right, #6B2C3F 70%, #e5e7eb 70%);
+    }
+
+    .celebration {
+      animation: celebrate 1s ease-out;
+    }
+
+    .tracking-pulse {
+      animation: pulse 2s infinite;
+    }
+
+    .map-marker {
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes celebrate {
+      0% { transform: scale(0.5); opacity: 0; }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.5; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .timeline-progress {
+      transition: width 1s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Enhanced Success Message -->
+  <div class="bg-[#6B2C3F] text-white">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center justify-center">
+        <i class="fas fa-bell mr-2"></i>
+        <span>Track your order anytime in our mobile app</span>
+        <button class="ml-4 px-4 py-1 bg-white/20 rounded-full text-sm hover:bg-white/30">
+          Download App
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-8">
+    <!-- Enhanced Order Success -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6 celebration">
+        <i class="fas fa-check text-3xl text-green-600"></i>
+      </div>
+      <h1 class="text-4xl font-playfair mb-3">Thank You for Your Order!</h1>
+      <p class="text-gray-600 mb-4">Order #JWL-12345-AE has been successfully placed</p>
+      <div class="flex items-center justify-center space-x-4">
+        <button class="bg-[#6B2C3F] text-white px-6 py-2 rounded-full hover:bg-[#D4AF37]">
+          <i class="far fa-envelope mr-2"></i>
+          Email Confirmation
+        </button>
+        <button class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700">
+          <i class="fab fa-whatsapp mr-2"></i>
+          WhatsApp Updates
+        </button>
+      </div>
+    </div>
+    
+    <!-- Enhanced Order Status -->
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-xl font-semibold">Order Status</h2>
+          <div class="text-sm text-gray-600">
+            Estimated Delivery: Feb 17-18, 2025
+          </div>
+        </div>
+        
+        <!-- Enhanced Tracking Timeline -->
+        <div class="relative pb-8">
+          <div class="absolute left-8 top-8 bottom-0 w-1 bg-gray-200"></div>
+          <div class="absolute left-8 top-8 bottom-0 w-1 bg-[#6B2C3F] timeline-progress" style="height: 30%"></div>
+          
+          <!-- Enhanced Status Steps -->
+          <div class="space-y-8">
+            <!-- Order Confirmed -->
+            <div class="flex group">
+              <div class="relative">
+                <div class="w-16 h-16 rounded-full bg-[#6B2C3F] flex items-center justify-center tracking-pulse">
+                  <i class="fas fa-check text-white text-xl"></i>
+                </div>
+                <div class="absolute top-0 left-0 w-16 h-16 rounded-full border-2 border-[#6B2C3F] animate-ping opacity-20"></div>
+              </div>
+              <div

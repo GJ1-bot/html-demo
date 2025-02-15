@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Checkout - Luxury Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Kufi+Arabic:wght@400;700&display=swap');
+    
+    .payment-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+      transition: transform 0.3s ease;
+    }
+
+    .payment-card:hover {
+      transform: scale(1.02);
+    }
+
+    .card-flip {
+      perspective: 1000px;
+    }
+
+    .card-flip-inner {
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card-flip.active .card-flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      backface-visibility: hidden;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .progress-animation {
+      animation: progress 2s ease-out;
+    }
+
+    @keyframes progress {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .shimmer {
+      background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.2) 50%, 
+        rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Enhanced Progress Bar -->
+  <div class="fixed top-0 left-0 right-0 z-50">
+    <div class="h-1 bg-gray-200">
+      <div class="h-full bg-[#6B2C3F] progress-animation" style="width: 66%"></div>
+    </div>
+  </div>
+
+  <!-- Enhanced Checkout Progress -->
+  <div class="bg-white shadow-md sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between max-w-3xl mx-auto relative">
+        <!-- Progress Steps -->
+        <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gray-200 -z-10"></div>
+        
+        <div class="flex items-center bg-white">
+          <div class="w-10 h-10 rounded-full bg-[#6B2C3F] text-white flex items-center justify-center">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="ml-3">
+            <div class="font-semibold">Shipping</div>
+            <div class="text-sm text-gray-500">Completed</div>
+          </div>
+        </div>
+
+        <div class="flex items-center bg-white">
+          <div class="w-10 h-10 rounded-full bg-[#6B2C3F] text-white flex items-center justify-center">
+            <span>2</span>
+          </div>
+          <div class="ml-3">
+            <div class="font-semibold">Payment</div>
+            <div class="text-sm text-gray-500">In Progress</div>
+          </div>
+        </div>
+
+        <div class="flex items-center bg-white">
+          <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center">
+            <span>3</span>
+          </div>
+          <div class="ml-3">
+            <div class="text-gray-400">Confirmation</div>
+            <div class="text-sm text-gray-400">Pending</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-12 gap-8">
+      <!-- Enhanced Left: Payment Details -->
+      <div class="col-span-8">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-playfair">Payment Method</h2>
+            <div class="flex items-center text-sm text-gray-600">
+              <i class="fas fa-lock mr-2"></i>
+              <span>Secure Payment</span>
+            </div>
+          </div>
+          
+          <!-- Enhanced Payment Options -->
+          <div class="space-y-4 mb-8">
+            <!-- Enhanced Credit/Debit Card -->
+            <div class="border rounded-lg p-6 cursor-pointer hover:border-[#6B2C3F] relative group">
+              <div class="absolute top-4 right-4">
+                <div class="flex space-x-2">
+                  <img src="https://via.placeholder.com/40" alt="Visa" class="h-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                  <img src="https://via.placeholder.com/40" alt="Mastercard" class="h-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                  <img src="https://via.placeholder.com/40" alt="Amex" class="h-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                </div>
+              </div>
+
+              <div class="flex items-center mb-6">
+                <input type="radio" name="payment" class="text-[#6B2C3F] w-5 h-5" checked>
+                <span class="ml-3 font-semibold">Credit/Debit Card</span>
+              </div>
+              
+              <!-- Enhanced Card Form -->
+              <div class="card-flip relative" id="cardFlip">
+                <div class="card-flip-inner">
+                  <!-- Card Front -->
+                  <div class="card-front">
+                    <div class="payment-card p-6 rounded-lg text-white mb-6">
+                      <div class="flex justify-between items-start mb-8">
+                        <img src="https://via.placeholder.com/40" alt="Chip" class="h-10">
+                        <i class="fab fa-cc-visa text-2xl"></i>
+                      </div>
+                      <div class="mb-4">
+                        <div class="text-sm opacity-75">Card Number</div>
+                        <div class="text-lg tracking-wider font-mono">
+                          <span class="mr-4">****</span>
+                          <span class="mr-4">****</span>
+                          <span class="mr-4">****</span>
+                          <span>1234</span>
+                        </div>
+                      </div>
+                      <div class="flex justify-between">
+                        <div>
+                          <div class="text-sm opacity-75">Card Holder</div>
+                          <div class="font-mono">JOHN DOE</div>
+                        </div>
+                        <div>
+                          <div class="text-sm opacity-75">Expires</div>
+                          <div class="font-mono">12/25</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Card Back -->
+                  <div class="card-back absolute top-0 left-0 w-full">
+                    <div class="payment-card p-6 rounded-lg text-white mb-6">
+                      <div class="bg-gray-600 h-12 -mx-6 mt-4"></div>
+                      <div class="mt-8">
+                        <div class="bg-white/20 h-10 flex items-center justify-end px-4">
+                          <span class="font-mono">***</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Enhanced Input Fields -->
+              <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="col-span-2">
+                    <label class="block text-sm text-gray-600 mb-2">Card Number</label>
+                    <div class="relative">
+                      <input type="text" 
+                             class="w-full pl-4 pr-12 py-3 border rounded-lg focus:outline-none focus:border-[#6B2C3F]" 
+                             placeholder="1234 5678 9012 3456"
+                             maxlength="19">
+                      <i class="fas fa-credit-card absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm text-gray-600 mb-2">Card Holder Name</label>
+                    <input type="text" 
+                           class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#6B2C3F]" 
+                           placeholder="Name on card">
+                  </div>
+                  <div>
+                    <label class="block text-sm text-gray-600 mb-2">Expiry Date</label>
+                    <input type="text" 
+                           class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#6B2C3F]" 
+                           placeholder="MM/YY"
+                           maxlength="5">
+                  </div>
+                  <div class="relative group">
+                    <label class="block text-sm text-gray-600 mb-2">
+                      CVV
+                      <i class="fas fa-question-circle ml-1 text-gray-400 cursor-help"></i>
+                    </label>
+                    <input type="text" 
+                           class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#6B2C3F]" 
+                           placeholder="***"
+                           maxlength="4"
+                           onfocus="document.getElementById('cardFlip').classList.add('active')"
+                           onblur="document.getElementById('cardFlip').classList.remove('active')">
+                    <!-- CVV Tooltip -->
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                      <div class="bg-gray-800 text-white text-xs px-3 py-2 rounded">
+                        3-4 digit security code on the back of your card
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Save Card Option -->
+              <div class="mt-4 flex items-center">
+                <input type="checkbox" class="text-[#6B2C3F] rounded">
+                <label class="ml-2 text-sm text-gray-600">
+                  Save this card for future purchases
+                </label>
+              </div>
+            </div>
+            
+            <!-- Enhanced Digital Wallets -->
+            <div class="border rounded-lg p-6 cursor-pointer hover:border-[#6B2C3F] group">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <input type="radio" name="payment" class="text-[#6B2C3F] w-5 h-5">
+                  <span class="ml-3 font-semibold">Digital Wallet</span>
+                </div>
+                <div class="flex space-x-4">
+                  <button class="flex items-center px-6 py-3 border rounded-lg hover:border-[#6B2C3F] hover:bg-gray-50 transition-colors">
+                    <i class="fab fa-apple-pay text-3xl"></i>
+                  </button>
+                  <button class="flex items-center px-6 py-3 border rounded-lg hover:border-[#6B2C3F] hover:bg-gray-50 transition-colors">
+                    <i class="fab fa-google-pay text-3xl"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- Wallet Benefits -->
+              <div class="mt-4 grid grid-cols-3 gap-4 text-sm text-gray-600">
+                <div class="flex items-center">
+                  <i class="fas fa-bolt text-[#D4AF37] mr-2"></i>
+                  Instant Payment
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-shield-alt text-[#D4AF37] mr-2"></i>
+                  Extra Security
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-gift text-[#D4AF37] mr-2"></i>
+                  Special Offers
+                </div>
+              </div>
+            </div>
+            
+            <!-- Enhanced Local Payment Methods -->
+            <div class="border rounded-lg p-6 cursor-pointer hover:border-[#6B2C3F] group">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <input type="radio" name="payment" class="text-[#6B2C3F] w-5 h-5">
+                  <span class="ml-3 font-semibold">Local Payment Methods</span>
+                </div>
+                <div class="flex space-x-4">
+                  <img src="https://via.placeholder.com/40" alt="Local Payment" class="h-8 opacity-50 group-hover:opacity-100 transition-opacity">
+                  <img src="https://via.placeholder.com/40" alt="Local Payment" class="h-8 opacity-50 group-hover:opacity-100 transition-opacity">
+                </div>
+              </div>
+              <!-- Local Payment Options -->
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <button class="p-3 border rounded-lg hover:border-[#6B2C3F] text-left flex items-center">
+                  <img src="https://via.placeholder.com/30" alt="Bank" class="h-6 mr-3">
+                  Direct Bank Transfer
+                </button>
+                <button class="p-3 border rounded-lg hover:border-[#6B2C3F] text-left flex items-center">
+                  <img src="https://via.placeholder.com/30" alt="BNPL" class="h-6 mr-3">
+                  Buy Now, Pay Later
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Enhanced Billing Address -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-semibold">Billing Address</h3>
+              <button class="text-sm text-[#6B2C3F] hover:underline flex items-center">
+                <i class="fas fa-copy mr-1"></i>
+                Same as Shipping
+              </button>
+            </div>
+            
+            <!-- Enhanced Address Form -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col-span-2">
+                <label class="block text-sm text-gray-600 mb-2">Street Address</label>
+                <input type="text" 
+                       class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#6B2C3F]"
+                       placeholder="Enter your street address">
+              </div>
+              <div>
+                <label class="block text-sm text-gray-600 mb-2">City</label>
+                <input type="text" 
+                       class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#6B2C3F]"
+                       placeholder="Enter city">
+              </div>
+              <div>
+                <label class="block text-sm text-gray-600 mb-2">Postal Code</label>
+                <input type="text" 
+                       class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#6B2C3F]"
+                       placeholder="Enter postal code">
+              </div>
+              <div class="col-span-2">
+                <label class="block text-sm text-gray-600 mb-2">Country</label>
+                <select class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#6B2C3F]">
+                  <option>United Arab Emirates</option>
+                  <option>Saudi Arabia</option>
+                  <option>Qatar</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Enhanced Right: Order Summary -->
+      <div class="col-span-4">
+        <div class="sticky top-24">
+          <!-- Enhanced Order Summary -->
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-6">Order Summary</h2>
+            
+            <!-- Enhanced Products List -->
+            <div class="space-y-4 mb-6">
+              <div class="flex items-start group">
+                <div class="relative">
+                  <img src="https://via.placeholder.com/80" 
+                       alt="Product" 
+                       class="w-20 h-20 object-cover rounded-lg">
+                  <!-- Quick View -->
+                  <button class="absolute inset-0 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <div class="ml-4 flex-grow">
+                  <div class="flex justify-between">
+                    <h3 class="font-semibold">Diamond Crescent Necklace</h3>
+                    <button class="text-gray-400 hover:text-[#6B2C3F]">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <p class="text-sm text-gray-600">18K Gold, VS1</p>
+                  <div class="flex justify-between items-center mt-2">
+                    <p class="text-[#D4AF37] font-semibold">$4,999</p>
+                    <div class="flex items-center text-sm">
+                      <button class="w-6 h-6 border rounded-full hover:border-[#6B2C3F] flex items-center justify-center">-</button>
+                      <span class="mx-2">1</span>
+                      <button class="w-6 h-6 border rounded-full hover:border-[#6B2C3F] flex items-center justify-center">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Enhanced Price Breakdown -->
+            <div class="space-y-3 mb-6">
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Subtotal</span>
+                <span>$4,999</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Shipping</span>
+                <span class="text-green-600 flex items-center">
+                  <i class="fas fa-check-circle mr-1"></i>
+                  Free
+                </span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">VAT (5%)</span>
+                <span>$249.95</span>
+              </div>
+              <div class="border-t pt-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-semibold">Total</span>
+                  <div class="text-right">
+                    <span class="text-2xl font-bold text-[#D4AF37]">$5,248.95</span>
+                    <div class="text-sm text-gray-600">~ 19,275 AED</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Enhanced Security Info -->
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+              <div class="flex items-start space-x-3">
+                <i class="fas fa-shield-alt text-[#6B2C3F] mt-1"></i>
+                <div class="flex-grow">
+                  <p class="text-sm font-semibold">Secure Checkout</p>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Your payment information is encrypted using 256-bit SSL technology
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Enhanced Place Order Button -->
+            <button class="w-full bg-[#6B2C3F] text-white py-4 rounded-lg hover:bg-[#D4AF37] transition-colors relative group">
+              <span class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <i class="fas fa-lock mr-2"></i>
+                Secure Checkout
+              </span>
+              <span class="group-hover:opacity-0 transition-opacity">
+                Place Order
+              </span>
+            </button>
+            
+            <!-- Enhanced Terms -->
+            <div class="mt-4 text-center">
+              <p class="text-xs text-gray-600">
+                By placing your order, you agree to our
+                <a href="#" class="text-[#6B2C3F] hover:underline">Terms & Conditions</a>
+                and
+                <a href="#" class="text-[#6B2C3F] hover:underline">Privacy Policy</a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Enhanced Support Section -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="font-semibold mb-4">Need Assistance?</h3>
+            <div class="space-y-4">
+              <button class="w-full flex items-center justify-between p-3 border rounded-lg hover:border-[#6B2C3F] group">
+                <div class="flex items-center">
+                  <i class="fas fa-comments text-[#D4AF37] mr-3"></i>
+                  <span>Live Chat</span>
+                </div>
+                <span class="text-green-600 text-sm">Online</span>
+              </button>
+              <button class="w-full flex items-center justify-between p-3 border rounded-lg hover:border-[#6B2C3F]">
+                <div class="flex items-center">
+                  <i class="fas fa-phone text-[#D4AF37] mr-3"></i>
+                  <span>Call Us</span>
+                </div>
+                <span class="text-sm text-gray-600">24/7</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Footer -->
+  <footer class="bg-white border-t mt-8">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+          <img src="https://via.placeholder.com/30" alt="SSL" class="h-8">
+          <img src="https://via.placeholder.com/30" alt="PCI" class="h-8">
+          <img src="https://via.placeholder.com/30" alt="Security" class="h-8">
+        </div>
+        <div class="flex items-center space-x-6 text-sm text-gray-600">
+          <a href="#" class="hover:text-[#6B2C3F]">Shipping Policy</a>
+          <a href="#" class="hover:text-[#6B2C3F]">Return Policy</a>
+          <a href="#" class="hover:text-[#6B2C3F]">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

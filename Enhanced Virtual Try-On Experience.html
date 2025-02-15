@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Virtual Try-On - Luxury Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+    
+    .camera-overlay {
+      background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .face-guide {
+      border: 2px dashed rgba(255,255,255,0.5);
+      animation: pulse 2s infinite;
+    }
+
+    .gesture-hint {
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 0.5; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .product-carousel {
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+    }
+
+    .product-carousel > div {
+      scroll-snap-align: start;
+    }
+
+    .lighting-control {
+      background: linear-gradient(to right, #FFB900, #FFFFFF);
+    }
+
+    .gesture-tutorial {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Enhanced Virtual Try-On Interface -->
+  <div class="min-h-screen relative">
+    <!-- Top Navigation Bar -->
+    <div class="fixed top-0 left-0 right-0 bg-gradient-to-b from-black/50 to-transparent z-50">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <!-- Back Button with Progress -->
+          <div class="flex items-center space-x-4">
+            <button class="text-white hover:text-[#D4AF37] flex items-center">
+              <i class="fas fa-arrow-left text-xl"></i>
+              <span class="ml-2">Back to Shopping</span>
+            </button>
+            <div class="h-1 w-32 bg-white/20 rounded-full">
+              <div class="h-full w-2/3 bg-[#D4AF37] rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center space-x-4">
+            <button class="bg-white/20 text-white px-4 py-2 rounded-full hover:bg-white/30 flex items-center">
+              <i class="fas fa-camera mr-2"></i>
+              Capture
+              <span class="ml-2 text-xs bg-white/20 px-2 py-1 rounded">Space</span>
+            </button>
+            <button class="bg-[#6B2C3F] text-white px-4 py-2 rounded-full hover:bg-[#D4AF37] flex items-center">
+              <i class="fas fa-video mr-2"></i>
+              Record
+              <span class="ml-2 text-xs bg-white/20 px-2 py-1 rounded">R</span>
+            </button>
+            <button class="bg-white/20 p-2 rounded-full hover:bg-white/30">
+              <i class="fas fa-expand"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Camera View with Enhanced AR -->
+    <div class="relative h-screen">
+      <!-- Camera Feed -->
+      <div class="absolute inset-0 bg-black">
+        <div class="camera-overlay absolute inset-0"></div>
+      </div>
+      
+      <!-- Enhanced AR Guidelines -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <!-- Face Detection Guide -->
+        <div class="relative">
+          <div class="w-64 h-64 rounded-full face-guide"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <i class="fas fa-face-smile text-6xl mb-4 text-[#D4AF37] gesture-hint"></i>
+            <p class="text-xl font-light">Position your face in the center</p>
+            <p class="text-sm text-gray-300 mt-2">Ensure good lighting for best results</p>
+          </div>
+        </div>
+
+        <!-- Gesture Tutorial -->
+        <div class="absolute bottom-32 left-1/2 transform -translate-x-1/2 bg-black/50 p-4 rounded-lg gesture-tutorial">
+          <div class="flex items-center space-x-8">
+            <div class="text-center">
+              <i class="fas fa-hand gesture-hint text-2xl mb-2"></i>
+              <p class="text-sm">Swipe to Rotate</p>
+            </div>
+            <div class="text-center">
+              <i class="fas fa-arrows-up-down gesture-hint text-2xl mb-2"></i>
+              <p class="text-sm">Pinch to Resize</p>
+            </div>
+            <div class="text-center">
+              <i class="fas fa-rotate gesture-hint text-2xl mb-2"></i>
+              <p class="text-sm">Two Fingers to Adjust</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Enhanced Side Controls -->
+      <div class="absolute right-4 top-1/2 transform -translate-y-1/2 space-y-4">
+        <!-- Lighting Control -->
+        <div class="bg-black/50 p-2 rounded-lg">
+          <button class="bg-white/20 p-3 rounded-full text-white hover:bg-white/30 mb-2">
+            <i class="fas fa-lightbulb"></i>
+          </button>
+          <div class="h-32 w-1 lighting-control rounded-full"></div>
+        </div>
+
+        <!-- Camera Controls -->
+        <div class="bg-black/50 p-2 rounded-lg space-y-2">
+          <button class="bg-white/20 p-3 rounded-full text-white hover:bg-white/30 tooltip" data-tip="Switch Camera">
+            <i class="fas fa-camera-rotate"></i>
+          </button>
+          <button class="bg-white/20 p-3 rounded-full text-white hover:bg-white/30 tooltip" data-tip="Beauty Filter">
+            <i class="fas fa-sparkles"></i>
+          </button>
+          <button class="bg-white/20 p-3 rounded-full text-white hover:bg-white/30 tooltip" data-tip="AR Effects">
+            <i class="fas fa-wand-magic-sparkles"></i>
+          </button>
+        </div>
+
+        <!-- View Options -->
+        <div class="bg-black/50 p-2 rounded-lg space-y-2">
+          <button class="bg-white/20 p-3 rounded-full text-white hover:bg-white/30 tooltip" data-tip="Side View">
+            <i class="fas fa-arrows-rotate"></i>
+          </button>
+          <button class="bg-white/20 p-3 rounded-full text-white hover:bg-white/30 tooltip" data-tip="Compare View">
+            <i class="fas fa-clone"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Enhanced Bottom Product Carousel -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent">
+      <div class="container mx-auto px-4 py-6">
+        <!-- Enhanced Categories -->
+        <div class="flex items-center space-x-4 mb-4">
+          <h3 class="text-lg font-semibold">Try On:</h3>
+          <div class="flex-grow overflow-x-auto product-carousel">
+            <div class="flex space-x-4">
+              <button class="text-white bg-[#6B2C3F] px-4 py-2 rounded-full whitespace-nowrap flex items-center">
+                <i class="fas fa-gem mr-2"></i>
+                Necklaces
+                <span class="ml-2 text-xs bg-white/20 px-2 py-1 rounded">12</span>
+              </button>
+              <button class="text-white bg-white/20 px-4 py-2 rounded-full whitespace-nowrap flex items-center hover:bg-white/30">
+                <i class="fas fa-ring mr-2"></i>
+                Earrings
+                <span class="ml-2 text-xs bg-white/20 px-2 py-1 rounded">8</span>
+              </button>
+              <button class="text-white bg-white/20 px-4 py-2 rounded-full whitespace-nowrap flex items-center hover:bg-white/30">
+                <i class="fas fa-crown mr-2"></i>
+                Tiaras
+                <span class="ml-2 text-xs bg-white/20 px-2 py-1 rounded">5</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Enhanced Products Carousel -->
+        <div class="relative">
+          <!-- Navigation Arrows -->
+          <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/50 p-2 rounded-full z-10">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/50 p-2 rounded-full z-10">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <!-- Products -->
+          <div class="flex space-x-4 overflow-x-auto product-carousel pb-4">
+            <!-- Enhanced Product Item -->
+            <div class="bg-white/10 rounded-lg p-3 backdrop-blur-sm min-w-[200px] group hover:bg-white/20 transition-all">
+              <div class="relative">
+                <img src="https://via.placeholder.com/200" alt="Diamond Necklace" 
+                     class="w-full aspect-square object-cover rounded-lg mb-2">
+                <button class="absolute top-2 right-2 bg-black/50 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                  <i class="far fa-heart"></i>
+                </button>
+                <!-- AR Ready Badge -->
+                <div class="absolute bottom-2 left-2 bg-[#D4AF37] text-black text-xs px-2 py-1 rounded-full flex items-center">
+                  <i class="fas fa-cube mr-1"></i>
+                  AR Ready
+                </div>
+              </div>
+              <div class="text-white">
+                <h3 class="font-semibold">Diamond Crescent</h3>
+                <p class="text-sm text-gray-300">18K Gold</p>
+                <div class="flex justify-between items-center mt-2">
+                  <p class="text-[#D4AF37]">$4,999</p>
+                  <button class="text-xs bg-white/20 px-2 py-1 rounded hover:bg-white/30">
+                    Details
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Repeat for more products -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced AI Assistant Float -->
+    <div class="fixed bottom-24 right-6 z-50">
+      <div class="relative group">
+        <button class="bg-[#6B2C3F] text-white rounded-full p-4 shadow-lg hover:bg-[#D4AF37]">
+          <i class="fas fa-magic mr-2"></i>
+          AI Style Advisor
+        </button>
+        <!-- AI Suggestions Popup -->
+        <div class="absolute bottom-full right-0 mb-4 w-64 bg-white text-gray-800 rounded-lg shadow-xl p-4 hidden group-hover:block">
+          <h4 class="font-semibold mb-2">Style Suggestions</h4>
+          <div class="space-y-2">
+            <div class="flex items-center p-2 hover:bg-gray-100 rounded">
+              <i class="fas fa-star text-[#D4AF37] mr-2"></i>
+              <span class="text-sm">This style suits your face shape</span>
+            </div>
+            <div class="flex items-center p-2 hover:bg-gray-100 rounded">
+              <i class="fas fa-lightbulb text-[#D4AF37] mr-2"></i>
+              <span class="text-sm">Try adjusting the necklace length</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced Share Options -->
+    <div class="fixed top-4 right-4 z-50">
+      <button class="bg-white/20 px-4 py-2 rounded-full hover:bg-white/30 flex items-center">
+        <i class="fas fa-share-alt mr-2"></i>
+        Share Look
+      </button>
+    </div>
+
+    <!-- Tutorial Overlay (Initially Hidden) -->
+    <div class="fixed inset-0 bg-black/80 hidden" id="tutorial">
+      <div class="container mx-auto px-4 h-full flex items-center justify-center">
+        <div class="max-w-lg text-center">
+          <h2 class="text-2xl font-semibold mb-4">How to Use Virtual Try-On</h2>
+          <div class="grid grid-cols-3 gap-8">
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-face-smile text-2xl"></i>
+              </div>
+              <p class="text-sm">Position your face in the frame</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-hand-pointer text-2xl"></i>
+              </div>
+              <p class="text-sm">Use gestures to adjust</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-camera text-2xl"></i>
+              </div>
+              <p class="text-sm">Capture your look</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
