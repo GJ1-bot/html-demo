@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desktop Experience - Luxury Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+    
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .hover-zoom {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-zoom:hover {
+      transform: scale(1.05);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header Navigation -->
+  <header class="bg-white shadow-sm fixed w-full z-50">
+    <div class="container mx-auto px-6">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-8">
+          <a href="#" class="text-2xl font-playfair">LUXE</a>
+          <nav class="hidden md:flex space-x-8">
+            <a href="#" class="text-gray-800 hover:text-[#6B2C3F]">Collections</a>
+            <a href="#" class="text-gray-800 hover:text-[#6B2C3F]">Customization</a>
+            <a href="#" class="text-gray-800 hover:text-[#6B2C3F]">Virtual Try-On</a>
+            <a href="#" class="text-gray-800 hover:text-[#6B2C3F]">Stories</a>
+          </nav>
+        </div>
+        
+        <div class="flex items-center space-x-6">
+          <div class="relative">
+            <input type="text" 
+                   placeholder="Search collections..." 
+                   class="w-64 pl-10 pr-4 py-2 border rounded-full text-sm focus:outline-none focus:border-[#6B2C3F]">
+            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+          </div>
+          
+          <div class="flex items-center space-x-4">
+            <button class="text-gray-800 hover:text-[#6B2C3F]">
+              <i class="fas fa-heart"></i>
+            </button>
+            <button class="text-gray-800 hover:text-[#6B2C3F]">
+              <i class="fas fa-shopping-bag"></i>
+            </button>
+            <button class="flex items-center space-x-2">
+              <img src="https://via.placeholder.com/32" alt="Profile" class="w-8 h-8 rounded-full">
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative h-[80vh] overflow-hidden">
+      <div class="absolute inset-0">
+        <img src="https://via.placeholder.com/1920x1080" alt="Hero" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black/30"></div>
+      </div>
+      
+      <div class="relative container mx-auto px-6 h-full flex items-center">
+        <div class="max-w-2xl text-white">
+          <h1 class="text-5xl font-playfair mb-6">Discover Your Perfect Piece</h1>
+          <p class="text-xl mb-8">Experience luxury jewelry with our innovative virtual try-on technology</p>
+          <div class="flex space-x-4">
+            <button class="px-8 py-3 bg-[#6B2C3F] text-white rounded-lg hover:bg-[#5a2434]">
+              Try Now
+            </button>
+            <button class="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-gray-900">
+              Explore Collection
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="flex justify-between items-end mb-12">
+          <div>
+            <h2 class="text-3xl font-playfair mb-2">Featured Collections</h2>
+            <p class="text-gray-600">Curated pieces for every occasion</p>
+          </div>
+          <div class="flex space-x-2">
+            <button class="w-10 h-10 rounded-full border flex items-center justify-center hover:border-[#6B2C3F] hover:text-[#6B2C3F]">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <button class="w-10 h-10 rounded-full border flex items-center justify-center hover:border-[#6B2C3F] hover:text-[#6B2C3F]">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-8">
+          <div class="group relative overflow-hidden rounded-lg">
+            <img src="https://via.placeholder.com/400" alt="Collection" class="w-full aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+              <div>
+                <h3 class="text-white text-xl font-semibold mb-2">Modern Minimalist</h3>
+                <p class="text-white/80">12 pieces</p>
+              </div>
+            </div>
+          </div>
+          <!-- More collections -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Virtual Try-On Experience -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 class="text-3xl font-playfair mb-6">Experience Virtual Try-On</h2>
+            <p class="text-gray-600 mb-8">
+              Try on our pieces virtually using advanced AR technology. See how each piece looks on you before making a purchase.
+            </p>
+            
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-full bg-[#6B2C3F] text-white flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-camera"></i>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">Real-Time Preview</h3>
+                  <p class="text-gray-600">See jewelry pieces on yourself in real-time with our AR technology</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-full bg-[#6B2C3F] text-white flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-sync"></i>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">360° View</h3>
+                  <p class="text-gray-600">Examine pieces from every angle with detailed 360° rotation</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-full bg-[#6B2C3F] text-white flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-share"></i>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">Share & Compare</h3>
+                  <p class="text-gray-600">Share your virtual try-on with friends and get instant feedback</p>
+                </div>
+              </div>
+            </div>
+
+            <button class="mt-10 px-8 py-3 bg-[#6B2C3F] text-white rounded-lg hover:bg-[#5a2434]">
+              Start Virtual Try-On
+            </button>
+          </div>
+
+          <div class="relative">
+            <img src="https://via.placeholder.com/600x800" alt="Try-On Demo" class="rounded-lg shadow-xl">
+            <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-lg shadow-lg">
+              <div class="flex items-center space-x-4">
+                <div class="w-16 h-16 rounded-lg overflow-hidden">
+                  <img src="https://via.placeholder.com/64" alt="Product" class="w-full h-full object-cover">
+                </div>
+                <div>
+                  <h4 class="font-semibold">Diamond Pendant</h4>
+                  <p class="text-[#D4AF37]">$1,999</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Stylist Integration -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-3 gap-8">
+          <div class="col-span-2">
+            <h2 class="text-3xl font-playfair mb-6">Your Personal AI Stylist</h2>
+            <div class="bg-gray-50 rounded-lg p-8">
+              <div class="flex space-x-6">
+                <div class="w-1/2">
+                  <h3 class="font-semibold mb-4">Style Preferences</h3>
+                  <div class="space-y-3">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="classic" class="mr-3">
+                      <label for="classic">Classic & Timeless</label>
+                    </div>
+                    <div class="flex items-center">
+                      <input type="checkbox" id="modern" class="mr-3">
+                      <label for="modern">Modern & Minimalist</label>
+                    </div>
+                    <div class="flex items-center">
+                      <input type="checkbox" id="vintage" class="mr-3">
+                      <label for="vintage">Vintage Inspired</label>
+                    </div>
+                  </div>
+
+                  <h3 class="font-semibold mt-8 mb-4">Occasions</h3>
+                  <div class="space-y-3">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="daily" class="mr-3">
+                      <label for="daily">Daily Wear</label>
+                    </div>
+                    <div class="flex items-center">
+                      <input type="checkbox" id="special" class="mr-3">
+                      <label for="special">Special Events</label>
+                    </div>
+                    <div class="flex items-center">
+                      <input type="checkbox" id="business" class="mr-3">
+                      <label for="business">Business</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="w-1/2">
+                  <h3 class="font-semibold mb-4">Budget Range</h3>
+                  <div class="mb-8">
+                    <input type="range" class="w-full" min="0" max="10000">
+                    <div class="flex justify-between text-sm text-gray-600">
+                      <span>$0</span>
+                      <span>$10,000+</span>
+                    </div>
+                  </div>
+
+                  <h3 class="font-semibold mb-4">Materials</h3>
+                  <div class="flex flex-wrap gap-2">
+                    <button class="px-4 py-2 border rounded-full text-sm hover:border-[#6B2C3F] hover:text-[#6B2C3F]">
+                      Gold
+                    </button>
+                    <button class="px-4 py-2 border rounded-full text-sm hover:border-[#6B2C3F] hover:text-[#6B2C3F]">
+                      Silver
+                    </button>
+                    <button class="px-4 py-2 border rounded-full text-sm hover:border-[#6B2C3F] hover:text-[#6B2C3F]">
+                      Platinum
+                    </button>
+                    <button class="px-4 py-2 border rounded-full text-sm hover:border-[#6B2C3F] hover:text-[#6B2C3F]">
+                      Diamond
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button class="w-full mt-8 py-3 bg-[#6B2C3F] text-white rounded-lg hover:bg-[#5a2434]">
+                Get Personalized Recommendations
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="bg-gray-50 rounded-lg p-6 h-full">
+              <h3 class="font-semibold mb-4">AI Recommendations</h3>
+              <div class="space-y-4">
+                <div class="bg-white rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <div class="flex space-x-4">
+                    <img src="https://via.placeholder.com/80" alt="Product" class="w-20 h-20 rounded-lg object-cover">
+                    <div>
+                      <h4 class="font-semibold">Diamond Pendant</h4>
+                      <p class="text-sm text-gray-600">Perfect for daily wear</p>
+                      <p class="text-[#D4AF37] mt-2">$1,999</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- More recommendations -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-playfair mb-6">LUXE</h3>
+          <p class="text-gray-400">
+            Discover the perfect piece of jewelry that tells your unique story.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Collections</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white">New Arrivals</a></li>
+            <li><a href="#" class="hover:text-white">Bestsellers</a></li>
+            <li><a href="#" class="hover:text-white">Custom Design</a></li>
+            <li><a href="#" class="hover:text-white">Limited Editions</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Customer Service</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white">Contact Us</a></li>
+            <li><a href="#" class="hover:text-white">Shipping & Returns</a></li>
+            <li><a href="#" class="hover:text-white">Care Guide</a></li>
+            <li><a href="#" class="hover:text-white">Size Guide</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Newsletter</h4>
+          <p class="text-gray-400 mb-4">Subscribe to receive updates, access to exclusive deals, and more.</p>
+          <div class="flex">
+            <input type="email" 
+                   placeholder="Enter your email" 
+                   class="flex-1 px-4 py-2 bg-gray-800 rounded-l-lg focus:outline-none">
+            <button class="px-6 py-2 bg-[#6B2C3F] rounded-r-lg hover:bg-[#5a2434]">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
